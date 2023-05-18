@@ -4,11 +4,10 @@ const db = require('../models')
 const { Band } = db 
 const {Op} = require('sequelize')
 
-// FIND ALL BANDS
+// FIND 
 bands.get('/', async (req, res) => {
     try {
         const foundBands = await Band.findAll({
-            order: [['available_start_time', 'ASC']],
             where: {
                 name:{[Op.like]: `%${req.query.name ? req.query.name : ''}%`}
             }
@@ -30,7 +29,7 @@ bands.get('/:id', async (req, res) => {
         res.status(500).json(error)
     }
 })
-// CREATE A BAND
+// CREATE 
 bands.post('/', async (req, res) => {
     try {
         const newBand = await Band.create(req.body)
@@ -58,7 +57,7 @@ bands.put('/:id', async (req, res) => {
         res.status(500).json(err)
     }
 })
-// DELETE A BAND
+// DELETE 
 bands.delete('/:id', async (req, res) => {
     try {
         const deletedBands = await Band.destroy({
